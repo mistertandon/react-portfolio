@@ -1,12 +1,11 @@
 export type ToDoT = {
-  id: string;
+  id: number;
   name: string;
   isCompleted: boolean;
 };
 
 export type ToDoMasterProp = {
   item: ToDoT;
-  key: string;
 };
 
 export type ToDoListProp = { items: ToDoT[] };
