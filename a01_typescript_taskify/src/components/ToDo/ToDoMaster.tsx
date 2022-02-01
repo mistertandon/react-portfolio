@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { ToDoT, ToDoMasterProp } from "./model";
+import { toDoAction } from "./ToDo.reducer";
+import ToDoView from "./ToDoView";
 
-const ToDoMaster: React.FC<ToDoMasterProp> = (prop: ToDoMasterProp) => {
-  const [action, setAction] = useState("");
+const actionStateInit = {
+  view: true,
+  edit: false,
+  delete: false,
+  create: false,
+};
 
-  return <div className="todo--container">{}</div>;
+const ToDoMaster: React.FC<ToDoMasterProp> = ({
+  item,
+  key,
+}: ToDoMasterProp) => {
+  const [action, setAction] = useReducer(toDoAction, actionStateInit);
+
+  return (
+    <div className="todo--container" key={key}>
+      <ToDoView item={item} />
+    </div>
+  );
 };
 
 export default ToDoMaster;

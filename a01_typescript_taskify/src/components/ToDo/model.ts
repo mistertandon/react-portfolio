@@ -6,6 +6,9 @@ export type ToDoT = {
 
 export type ToDoMasterProp = {
   item: ToDoT;
+  key: string;
 };
 
 export type ToDoListProp = { items: ToDoT[] };
+
+export type ToDoViewProp = { item: ToDoT };

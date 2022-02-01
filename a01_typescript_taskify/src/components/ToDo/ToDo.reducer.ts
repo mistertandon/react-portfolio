@@ -1,6 +1,6 @@
 import { CRUD } from "./../../helpers/constants";
 
-const toDoAction = (state: any, action: any) => {
+export const toDoAction = (state: any, action: any) => {
   switch (action.type) {
     case CRUD.VIEW: {
       return {
