@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.scss";
 
-import ToDoParent from "./components/ToDo/ToDoParent";
+import ToDoParent from "./components/todo/ToDoParent";
 
 const App: React.FC = () => {
   return (
