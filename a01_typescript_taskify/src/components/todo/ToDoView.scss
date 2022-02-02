@@ -5,5 +5,18 @@
   .child-a--tvc {
   }
   .child-b--tvc {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cb-child-a--tvc,
+  .cb-child-b--tvc {
+    margin-right: 5px;
+    padding: 0 5px;
+  }
+
+  .cb-child-a--tvc:last-child,
+  .cb-child-b--tvc:last-child {
+    margin-right: 0px;
   }
 }

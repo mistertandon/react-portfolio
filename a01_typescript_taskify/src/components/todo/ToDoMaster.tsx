@@ -10,12 +10,20 @@ const actionStateInit = {
   create: false,
 };
 
-const ToDoMaster: React.FC<ToDoMasterProp> = ({ item }: ToDoMasterProp) => {
+const ToDoMaster: React.FC<ToDoMasterProp> = ({
+  item,
+  iscompleted,
+  toDoUpdateStatus,
+}: ToDoMasterProp) => {
   const [action, setAction] = useReducer(toDoAction, actionStateInit);
 
   return (
     <div className="todo--container">
-      <ToDoView item={item} />
+      <ToDoView
+        item={item}
+        toDoUpdateStatus={toDoUpdateStatus}
+        iscompleted={iscompleted}
+      />
     </div>
   );
 };

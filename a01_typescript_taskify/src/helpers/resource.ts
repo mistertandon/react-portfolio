@@ -1,3 +1,3 @@
-export const getUniqueId: () => string = () => {
-  return new Date().valueOf().toString();
+export const getUniqueId: () => number = () => {
+  return new Date().valueOf() * (Math.random() * (100 - 1) + 1);
 };
