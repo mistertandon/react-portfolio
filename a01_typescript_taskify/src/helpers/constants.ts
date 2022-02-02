@@ -1,6 +1,6 @@
-import { CRUD_T } from "./constants.model";
+import { CRUD_TYPE } from "./constants.model";
 
-export const CRUD: CRUD_T = {
+export const CRUD: CRUD_TYPE = {
   READ: "READ",
   VIEW: "VIEW",
   EDIT: "EDIT",

@@ -1,14 +1,14 @@
 import React from "react";
-import "./ToDoView.scss";
-import { CRUD } from "./../../helpers/constants";
-import { ToDoViewProp } from "./todo.model";
+import "./ViewTask.scss";
+import { CRUD } from "../../helpers/constants";
+import { ViewTask_PROP } from "./task.model";
 
-const ToDoView: React.FC<ToDoViewProp> = ({
+const ViewTask: React.FC<ViewTask_PROP> = ({
   item,
   iscompleted,
-  toDoUpdateStatus,
+  updateTaskStatus,
   dispatchToDoMasterAction,
-}: ToDoViewProp) => {
+}: ViewTask_PROP) => {
   const { name, isCompleted } = item;
 
   return (
@@ -29,7 +29,7 @@ const ToDoView: React.FC<ToDoViewProp> = ({
           <button
             className="cbcb-child-a--tvc"
             onClick={() => {
-              toDoUpdateStatus(!iscompleted, item);
+              updateTaskStatus(!iscompleted, item);
             }}
           >
             {iscompleted ? "Mark in-progress" : "Mark Complete"}
@@ -40,4 +40,4 @@ const ToDoView: React.FC<ToDoViewProp> = ({
   );
 };
 
-export default ToDoView;
+export default ViewTask;

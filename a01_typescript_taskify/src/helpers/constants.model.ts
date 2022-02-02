@@ -1,4 +1,4 @@
-export type CRUD_T = {
+export type CRUD_TYPE = {
   READ: "READ";
   VIEW: "VIEW";
   EDIT: "EDIT";

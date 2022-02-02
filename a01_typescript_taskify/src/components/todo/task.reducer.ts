@@ -1,18 +1,18 @@
-import { CRUD } from "./../../helpers/constants";
+import { CRUD } from "../../helpers/constants";
 
 import {
-  toDoReducer_TYPE,
-  toDoReducerState_TYPE,
-  toDoReducerAction_TYPE,
-} from "./todo.model";
+  TaskReducer_TYPE,
+  TaskReducerState_TYPE,
+  TaskReducerAction_TYPE,
+} from "./task.model";
 
-export const toDoReducer: toDoReducer_TYPE<
-  toDoReducerState_TYPE,
-  toDoReducerAction_TYPE
+export const taskReducer: TaskReducer_TYPE<
+  TaskReducerState_TYPE,
+  TaskReducerAction_TYPE
 > = (
-  state: toDoReducerState_TYPE,
-  action: toDoReducerAction_TYPE
-): toDoReducerState_TYPE => {
+  state: TaskReducerState_TYPE,
+  action: TaskReducerAction_TYPE
+): TaskReducerState_TYPE => {
   switch (action.type) {
     case CRUD.VIEW: {
       return {

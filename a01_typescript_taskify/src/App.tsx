@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.scss";
 
-import ToDoParent from "./components/todo/ToDoParent";
+import TaskParent from "./components/todo/TaskParent";
 
 const App: React.FC = () => {
   return (
     <div className="app--container">
-      <ToDoParent />
+      <TaskParent />
     </div>
   );
 };
