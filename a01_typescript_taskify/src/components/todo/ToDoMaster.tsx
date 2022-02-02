@@ -1,6 +1,12 @@
 import React, { useReducer, useState } from "react";
-import { ToDoT, ToDoMasterProp } from "./model";
-import { toDoAction } from "./ToDo.reducer";
+import {
+  ToDoT,
+  ToDoMasterProp,
+  toDoReducerState_TYPE,
+  toDoReducer_TYPE,
+  toDoReducerAction_TYPE,
+} from "./todo.model";
+import { toDoReducer } from "./ToDo.reducer";
 import ToDoView from "./ToDoView";
 
 const actionStateInit = {
@@ -15,7 +21,9 @@ const ToDoMaster: React.FC<ToDoMasterProp> = ({
   iscompleted,
   toDoUpdateStatus,
 }: ToDoMasterProp) => {
-  const [action, setAction] = useReducer(toDoAction, actionStateInit);
+  const [todoMasterState, dispatchToDoMasterAction] = useReducer<
+    toDoReducer_TYPE<toDoReducerState_TYPE, toDoReducerAction_TYPE>
+  >(toDoReducer, actionStateInit);
 
   return (
     <div className="todo--container">
@@ -23,6 +31,7 @@ const ToDoMaster: React.FC<ToDoMasterProp> = ({
         item={item}
         toDoUpdateStatus={toDoUpdateStatus}
         iscompleted={iscompleted}
+        dispatchToDoMasterAction={dispatchToDoMasterAction}
       />
     </div>
   );

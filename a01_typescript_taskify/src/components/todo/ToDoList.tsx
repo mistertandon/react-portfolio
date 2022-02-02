@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./ToDoList.scss";
 import { getUniqueId } from "./../../helpers/resource";
-import { ToDoListProp, ToDoT } from "./model";
+import { ToDoListProp, ToDoT } from "./todo.model";
 import ToDoMaster from "./ToDoMaster";
 
 const ToDoList: React.FC<ToDoListProp> = ({ items }: ToDoListProp) => {

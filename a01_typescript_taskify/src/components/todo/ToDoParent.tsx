@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ToDoParent.scss";
-import { ToDoT } from "./model";
+import { ToDoT } from "./todo.model";
 import AddToDo from "./AddToDo";
 import ToDoList from "./ToDoList";
 
