@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./TaskParent.scss";
-import { TaskParent_TYPE } from "./task.model";
+import { Task_TYPE } from "./task.model";
 import AddTask from "./AddTask";
 import TaskList from "./TaskList";
 
 const TaskParent: React.FC = () => {
-  const [toDoList, setToDoList] = useState<TaskParent_TYPE[]>([
+  const [toDoList, setToDoList] = useState<Task_TYPE[]>([
     {
       id: new Date().valueOf() * (Math.random() * (100 - 1) + 1),
       name: "Parvesh",
@@ -28,11 +28,9 @@ const TaskParent: React.FC = () => {
     },
   ]);
 
-  const [pendingTaskList, setPendingTaskList] = useState<TaskParent_TYPE[]>([]);
+  const [pendingTaskList, setPendingTaskList] = useState<Task_TYPE[]>([]);
 
-  const [completedTaskList, setCompletedTaskList] = useState<TaskParent_TYPE[]>(
-    []
-  );
+  const [completedTaskList, setCompletedTaskList] = useState<Task_TYPE[]>([]);
 
   const [toDoListJSONStringifyVersion, setToDoListJSONStringifyVersion] =
     useState<string>(JSON.stringify(toDoList));
@@ -43,27 +41,28 @@ const TaskParent: React.FC = () => {
     setCompletedTaskList(toDoList.filter((item) => item.isCompleted));
   }, [toDoListJSONStringifyVersion, toDoList]);
 
-  const updateTaskStatus: (
-    todoStatus: boolean,
-    actionItem: TaskParent_TYPE
-  ) => void = useCallback((todoStatus, actionItem) => {
-    const indexId: number = toDoList.findIndex((toDoItem) => {
-      return toDoItem.id === actionItem.id;
-    });
+  const updateTaskStatus: (todoStatus: boolean, actionItem: Task_TYPE) => void =
+    useCallback((todoStatus, actionItem) => {
+      const indexId: number = toDoList.findIndex((toDoItem) => {
+        return toDoItem.id === actionItem.id;
+      });
 
-    toDoList[indexId] = {
-      ...actionItem,
-      isCompleted: todoStatus,
-    };
+      toDoList[indexId] = {
+        ...actionItem,
+        isCompleted: todoStatus,
+      };
 
-    setToDoList(toDoList);
-    console.log(toDoList);
-    setToDoListJSONStringifyVersion(JSON.stringify(toDoList));
-  }, []);
+      setToDoList(toDoList);
+      console.log(toDoList);
+      setToDoListJSONStringifyVersion(JSON.stringify(toDoList));
+    }, []);
 
-  const addTaskHandler: (item: TaskParent_TYPE) => void = (
-    item: TaskParent_TYPE
-  ) => {
+  const updateTask = (item: Task_TYPE) => {
+    console.log("updateTask");
+    console.log("item", item);
+  };
+
+  const addTaskHandler: (item: Task_TYPE) => void = (item: Task_TYPE) => {
     setToDoList([...toDoList, item]);
   };
 
@@ -74,6 +73,7 @@ const TaskParent: React.FC = () => {
         pendingTaskList={pendingTaskList}
         completedTaskList={completedTaskList}
         updateTaskStatus={updateTaskStatus}
+        updateTask={updateTask}
       />
     </div>
   );

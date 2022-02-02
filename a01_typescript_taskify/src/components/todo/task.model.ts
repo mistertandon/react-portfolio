@@ -6,22 +6,18 @@ export type Task_TYPE = {
   isCompleted: boolean;
 };
 
-export type TaskParent_TYPE = {
-  id: number;
-  name: string;
-  isCompleted: boolean;
+export type TaskList_PROP = {
+  updateTaskStatus: (todoStatus: boolean, item: Task_TYPE) => void;
+  updateTask: (item: Task_TYPE) => void;
+  pendingTaskList: Task_TYPE[];
+  completedTaskList: Task_TYPE[];
 };
 
 export type TaskMaster_PROP = {
   item: Task_TYPE;
   iscompleted: boolean;
   updateTaskStatus: (todoStatus: boolean, item: Task_TYPE) => void;
-};
-
-export type TaskList_PROP = {
-  updateTaskStatus: (todoStatus: boolean, item: Task_TYPE) => void;
-  pendingTaskList: Task_TYPE[];
-  completedTaskList: Task_TYPE[];
+  updateTask: (item: Task_TYPE) => void;
 };
 
 export type ViewTask_PROP = {
@@ -33,6 +29,11 @@ export type ViewTask_PROP = {
 
 export type AddTask_PROP = {
   addTaskHandler: (item: Task_TYPE) => void;
+};
+
+export type EditTask_PROP = {
+  item: Task_TYPE;
+  updateTask: (item: Task_TYPE) => void;
 };
 
 export type TaskReducerState_TYPE = {

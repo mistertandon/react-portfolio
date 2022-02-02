@@ -21,6 +21,7 @@ const TaskMaster: React.FC<TaskMaster_PROP> = ({
   item,
   iscompleted,
   updateTaskStatus,
+  updateTask,
 }: TaskMaster_PROP) => {
   const [todoMasterState, dispatchToDoMasterAction] = useReducer<
     TaskReducer_TYPE<TaskReducerState_TYPE, TaskReducerAction_TYPE>
@@ -36,7 +37,7 @@ const TaskMaster: React.FC<TaskMaster_PROP> = ({
           dispatchToDoMasterAction={dispatchToDoMasterAction}
         />
       )}
-      {todoMasterState.edit && <EditTask />}
+      {todoMasterState.edit && <EditTask item={item} updateTask={updateTask} />}
     </div>
   );
 };
