@@ -1,34 +1,40 @@
 import { CRUD_T } from "../../helpers/constants.model";
 
-export type ToDoT = {
+export type ToDo_TYPE = {
   id: number;
   name: string;
   isCompleted: boolean;
 };
 
 export type ToDoMasterProp = {
-  item: ToDoT;
+  item: ToDo_TYPE;
   iscompleted: boolean;
-  toDoUpdateStatus: (todoStatus: boolean, item: ToDoT) => void;
+  toDoUpdateStatus: (todoStatus: boolean, item: ToDo_TYPE) => void;
 };
 
-export type ToDoListProp = { items: ToDoT[] };
+export type ToDoList_Prop = {
+  toDoUpdateStatus: (todoStatus: boolean, item: ToDo_TYPE) => void;
+  pendingToDoList: ToDo_TYPE[];
+  completedToDoList: ToDo_TYPE[];
+};
 
 export type ToDoViewProp = {
-  item: ToDoT;
+  item: ToDo_TYPE;
   iscompleted: boolean;
-  toDoUpdateStatus: (todoStatus: boolean, item: ToDoT) => void;
+  toDoUpdateStatus: (todoStatus: boolean, item: ToDo_TYPE) => void;
   dispatchToDoMasterAction: any;
 };
 
-export type toDoReducerState_TYPE =
-  | {
-      view: boolean;
-      edit: boolean;
-      delete: boolean;
-      create: boolean;
-    }
-  | undefined;
+export type ToDoAdd_PROP = {
+  addToDoItem: (item: ToDo_TYPE) => void;
+};
+
+export type toDoReducerState_TYPE = {
+  view: boolean;
+  edit: boolean;
+  delete: boolean;
+  create: boolean;
+};
 
 export type toDoReducerAction_TYPE = {
   type: keyof CRUD_T;

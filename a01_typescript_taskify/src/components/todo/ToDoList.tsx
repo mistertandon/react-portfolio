@@ -1,43 +1,16 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./ToDoList.scss";
-import { getUniqueId } from "./../../helpers/resource";
-import { ToDoListProp, ToDoT } from "./todo.model";
+import { ToDoList_Prop, ToDo_TYPE } from "./todo.model";
 import ToDoMaster from "./ToDoMaster";
 
-const ToDoList: React.FC<ToDoListProp> = ({ items }: ToDoListProp) => {
-  const [toDoList, setToDoList] = useState<ToDoT[]>(items);
-
-  const [toDoListJSONStringifyVersion, setToDoListJSONStringifyVersion] =
-    useState<string>(JSON.stringify(toDoList));
-
-  const [pendingToDoList, setPendingToDoList] = useState<ToDoT[]>([]);
-  const [completedToDoList, setCompletedToDoList] = useState<ToDoT[]>([]);
-
-  useEffect(() => {
-    setPendingToDoList(items.filter((item) => !item.isCompleted));
-    setCompletedToDoList(items.filter((item) => item.isCompleted));
-  }, [toDoListJSONStringifyVersion]);
-
-  const toDoUpdateStatus: (todoStatus: boolean, actionItem: ToDoT) => void =
-    useCallback((todoStatus, actionItem) => {
-      const indexId: number = toDoList.findIndex((toDoItem) => {
-        return toDoItem.id === actionItem.id;
-      });
-
-      toDoList[indexId] = {
-        ...actionItem,
-        isCompleted: todoStatus,
-      };
-
-      setToDoList(toDoList);
-      setToDoListJSONStringifyVersion(JSON.stringify(toDoList));
-    }, []);
+const ToDoList: React.FC<ToDoList_Prop> = (props: ToDoList_Prop) => {
+  const { pendingToDoList, completedToDoList, toDoUpdateStatus } = props;
 
   return (
     <div className="todo-list--container">
       <div className="child-a--tlc">
         {Array.isArray(pendingToDoList) &&
-          pendingToDoList.map((toDoItem: ToDoT) => (
+          pendingToDoList.map((toDoItem: ToDo_TYPE) => (
             <ToDoMaster
               toDoUpdateStatus={toDoUpdateStatus}
               iscompleted={false}
@@ -48,7 +21,7 @@ const ToDoList: React.FC<ToDoListProp> = ({ items }: ToDoListProp) => {
       </div>
       <div className="child-b--tlc">
         {Array.isArray(completedToDoList) &&
-          completedToDoList.map((toDoItem: ToDoT) => (
+          completedToDoList.map((toDoItem: ToDo_TYPE) => (
             <ToDoMaster
               toDoUpdateStatus={toDoUpdateStatus}
               iscompleted={true}
