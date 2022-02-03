@@ -57,9 +57,15 @@ const TaskParent: React.FC = () => {
       setToDoListJSONStringifyVersion(JSON.stringify(toDoList));
     }, []);
 
-  const updateTask = (item: Task_TYPE) => {
-    console.log("updateTask");
-    console.log("item", item);
+  const updateTask = (actionItem: Task_TYPE) => {
+    const indexId: number = toDoList.findIndex((toDoItem) => {
+      return toDoItem.id === actionItem.id;
+    });
+
+    if (indexId !== -1) {
+      toDoList.splice(indexId, 1, actionItem);
+      setToDoListJSONStringifyVersion(JSON.stringify(toDoList));
+    }
   };
 
   const addTaskHandler: (item: Task_TYPE) => void = (item: Task_TYPE) => {

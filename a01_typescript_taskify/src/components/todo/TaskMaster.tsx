@@ -37,7 +37,13 @@ const TaskMaster: React.FC<TaskMaster_PROP> = ({
           dispatchToDoMasterAction={dispatchToDoMasterAction}
         />
       )}
-      {todoMasterState.edit && <EditTask item={item} updateTask={updateTask} />}
+      {todoMasterState.edit && (
+        <EditTask
+          item={item}
+          updateTask={updateTask}
+          dispatchToDoMasterAction={dispatchToDoMasterAction}
+        />
+      )}
     </div>
   );
 };

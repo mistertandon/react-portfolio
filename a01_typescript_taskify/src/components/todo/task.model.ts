@@ -34,6 +34,7 @@ export type AddTask_PROP = {
 export type EditTask_PROP = {
   item: Task_TYPE;
   updateTask: (item: Task_TYPE) => void;
+  dispatchToDoMasterAction: React.Dispatch<TaskReducerAction_TYPE>;
 };
 
 export type TaskReducerState_TYPE = {

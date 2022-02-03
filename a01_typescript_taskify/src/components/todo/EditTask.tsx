@@ -1,25 +1,56 @@
 import React, { useState } from "react";
 import { EditTask_PROP } from "./task.model";
+import { CRUD } from "./../../helpers/constants";
 
 const EditTask: React.FC<EditTask_PROP> = (prop: EditTask_PROP) => {
-  const { item, updateTask } = prop;
+  const { item, dispatchToDoMasterAction, updateTask } = prop;
 
   const [formData, setFormData] = useState({
+    id: item.id,
     name: item.name,
     isCompleted: item.isCompleted,
   });
 
-  const onSubmit = (e: any) => {
+  const [formFieldsErrors, setFormFieldsErrors] = useState({});
+
+  const handleErrorCheckRequest = async () => {
+    let errors: any = {};
+
+    if (!formData.name) {
+      errors["name"] = "Task name is mandatory";
+    }
+
+    return {
+      error: {
+        status: Object.keys(errors).length !== 0,
+        errors,
+      },
+    };
+  };
+
+  const handleSubmitRequest = async (e: any) => {
     e.preventDefault();
+
+    const response = await handleErrorCheckRequest();
+
+    if (response.error && response.error.status) {
+      setFormFieldsErrors({ ...response.error.errors });
+    } else {
+      updateTask(formData);
+    }
   };
 
   const handleOnChange = (e: any) => {
-    console.log(e);
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleTaskStatusUpdateRequest = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.checked });
   };
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmitRequest}>
         <div>
           <label>
             <input
@@ -38,14 +69,20 @@ const EditTask: React.FC<EditTask_PROP> = (prop: EditTask_PROP) => {
               type="checkbox"
               checked={formData.isCompleted}
               className="ca-child-a"
-              onChange={(e) => handleOnChange(e)}
+              onChange={(e) => handleTaskStatusUpdateRequest(e)}
               tabIndex={1}
             />
           </label>
         </div>
         <div>
           <button type="submit">Edit</button>
-          <button>Cancel</button>
+          <button
+            onClick={() => {
+              dispatchToDoMasterAction({ type: CRUD.VIEW });
+            }}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>
