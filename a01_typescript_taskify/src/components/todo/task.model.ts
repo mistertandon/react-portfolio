@@ -31,11 +31,22 @@ export type AddTask_PROP = {
   addTaskHandler: (item: Task_TYPE) => void;
 };
 
+/**
+ * ======= EditTask Component =======
+ */
 export type EditTask_PROP = {
   item: Task_TYPE;
   updateTask: (item: Task_TYPE) => void;
   dispatchToDoMasterAction: React.Dispatch<TaskReducerAction_TYPE>;
 };
+
+//handleErrorCheckRequest_TYPE:
+export type handleErrorCheckRequest_TYPE = () => Promise<{
+  error: {
+    status: boolean;
+    errors?: Partial<Task_TYPE>;
+  };
+}>;
 
 export type TaskReducerState_TYPE = {
   view: boolean;

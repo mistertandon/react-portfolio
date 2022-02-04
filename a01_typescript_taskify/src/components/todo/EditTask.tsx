@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-import { EditTask_PROP } from "./task.model";
+import {
+  Task_TYPE,
+  EditTask_PROP,
+  handleErrorCheckRequest_TYPE,
+} from "./task.model";
 import { CRUD } from "./../../helpers/constants";
 
 const EditTask: React.FC<EditTask_PROP> = (prop: EditTask_PROP) => {
   const { item, dispatchToDoMasterAction, updateTask } = prop;
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Task_TYPE>({
     id: item.id,
     name: item.name,
     isCompleted: item.isCompleted,
   });
 
-  const [formFieldsErrors, setFormFieldsErrors] = useState({});
+  const [formFieldsErrors, setFormFieldsErrors] = useState<Partial<Task_TYPE>>(
+    {}
+  );
 
-  const handleErrorCheckRequest = async () => {
-    let errors: any = {};
+  const handleErrorCheckRequest: handleErrorCheckRequest_TYPE = async () => {
+    let errors: Partial<Task_TYPE> = {};
 
     if (!formData.name) {
       errors["name"] = "Task name is mandatory";
@@ -28,7 +34,9 @@ const EditTask: React.FC<EditTask_PROP> = (prop: EditTask_PROP) => {
     };
   };
 
-  const handleSubmitRequest = async (e: any) => {
+  const handleSubmitRequest: (
+    e: React.FormEvent<HTMLFormElement>
+  ) => void = async (e) => {
     e.preventDefault();
 
     const response = await handleErrorCheckRequest();
@@ -40,11 +48,15 @@ const EditTask: React.FC<EditTask_PROP> = (prop: EditTask_PROP) => {
     }
   };
 
-  const handleOnChange = (e: any) => {
+  const handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void = (
+    e
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleTaskStatusUpdateRequest = (e: any) => {
+  const handleTaskStatusUpdateRequest = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.checked });
   };
 
